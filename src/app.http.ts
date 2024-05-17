@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
         res.end( htmlFile );
         return;
     } 
-
+    
     if ( req.url?.endsWith('.js')) { 
         res.writeHead(200, { 'Content-Type': 'application/javascript'});
     } else if(req.url?.endsWith('.css')) {

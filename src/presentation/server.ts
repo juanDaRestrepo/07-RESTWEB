@@ -26,14 +26,24 @@ export class Server {
         // Public Folder
         this.app.use( express.static(this.publicPath));
 
+        this.app.get('/api/todos', (req, res) => {
+            return res.json([
+                {id: 1, text: 'Buy Milk', createAt: new Date()},
+                {id: 2, text: 'Study Prod', createAt: new Date()},
+                {id: 3, text: 'Watch a serie', createAt: new Date()}
+            ])
+        })
+
         this.app.get('*', (req, res) => {
             const indexPath = path.join(__dirname + `../../../${this.publicPath}/index.html`);
             res.sendFile(indexPath);
-        })
+        });
 
-        this.app.listen(8080, () => {
-            console.log(`Server running on port ${8080}`);
-        })
+       
+
+        this.app.listen(3000, () => {
+            console.log(`Server running on port ${3000}`);
+        });
         
     }
 }
