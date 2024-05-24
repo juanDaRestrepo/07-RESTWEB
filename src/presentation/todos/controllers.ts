@@ -45,7 +45,7 @@ export class TodosController {
     }
 
     public updateTodo = ( req: Request, res: Response ) => {
-      console.log("update todo")
+      
       const id = +req.params.id;
       if ( isNaN( id ) ) return res.status( 400 ).json( { error: 'ID argument is not a number' } );
       
@@ -53,7 +53,7 @@ export class TodosController {
       if ( !todo ) return res.status( 404 ).json( { error: `Todo with id ${ id } not found` } );
   
       const { text, completedAt } = req.body;
-      console.log(completedAt)
+      
       todo.text = text || todo.text;
       ( completedAt === 'null' )
         ? todo.completedAt = null
