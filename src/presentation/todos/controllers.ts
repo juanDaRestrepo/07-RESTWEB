@@ -14,6 +14,7 @@ export class TodosController {
     }
 
     public getTodos = ( req: Request, res: Response ) => {
+      console.log("update todo")
         return res.json( todos );
       };
 
@@ -39,10 +40,29 @@ export class TodosController {
       }
 
       todos.push(newTodo);
-      res.json(newTodo)
-
+      res.json(newTodo);
 
     }
 
+    public updateTodo = ( req: Request, res: Response ) => {
+      console.log("update todo")
+      const id = +req.params.id;
+      if ( isNaN( id ) ) return res.status( 400 ).json( { error: 'ID argument is not a number' } );
+      
+      const todo = todos.find( todo => todo.id === id );
+      if ( !todo ) return res.status( 404 ).json( { error: `Todo with id ${ id } not found` } );
+  
+      const { text, completedAt } = req.body;
+      console.log(completedAt)
+      todo.text = text || todo.text;
+      ( completedAt === 'null' )
+        ? todo.completedAt = null
+        : todo.completedAt = new Date( completedAt || todo.completedAt );
+      
+  
+      res.json( todo );
+  
+    }
+  
 
 }
