@@ -37,11 +37,9 @@ export class Server {
             const indexPath = path.join(__dirname + `../../../${this.publicPath}/index.html`);
             res.sendFile(indexPath);
         });
-
-       
-        const PORT = process.env.PORT || 4000;
-        this.app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
+        
+        this.app.listen(this.port, () => {
+            console.log(`Server running on this.port ${this.port}`);
         });
         
     }
